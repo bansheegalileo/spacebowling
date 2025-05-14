@@ -906,7 +906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   releaseForceZ: -5
   moveSpeed: 10
-  xMovementForce: -2
+  xMovementForce: -30
 --- !u!54 &443758838
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1952,7 +1952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   releaseForceZ: -5
   moveSpeed: 10
-  xMovementForce: -2
+  xMovementForce: -30
 --- !u!43 &810751207
 Mesh:
   m_ObjectHideFlags: 0
@@ -5461,7 +5461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   releaseForceZ: -5
   moveSpeed: 10
-  xMovementForce: -2
+  xMovementForce: -30
 --- !u!54 &1791981357
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6058,7 +6058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   releaseForceZ: -5
   moveSpeed: 10
-  xMovementForce: -2
+  xMovementForce: -30
 --- !u!54 &1900001447
 Rigidbody:
   m_ObjectHideFlags: 0
