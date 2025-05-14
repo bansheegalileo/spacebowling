@@ -910,7 +910,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443758834}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 24
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1893,7 +1893,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 755982160}
   serializedVersion: 4
-  m_Mass: 0.5
+  m_Mass: 12
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3193,6 +3193,11 @@ PrefabInstance:
     - target: {fileID: 5773256366622995465, guid: 1644f8f6d950f87408375866a875e80d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844890755875452212, guid: 1644f8f6d950f87408375866a875e80d,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6638533983739928939, guid: 1644f8f6d950f87408375866a875e80d,
@@ -5460,7 +5465,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791981353}
   serializedVersion: 4
-  m_Mass: 0.7
+  m_Mass: 16
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6057,7 +6062,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900001443}
   serializedVersion: 4
-  m_Mass: 1.4
+  m_Mass: 24
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
