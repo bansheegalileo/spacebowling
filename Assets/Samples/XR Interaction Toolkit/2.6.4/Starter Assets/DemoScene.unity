@@ -447,6 +447,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1107317934}
     m_Modifications:
+    - target: {fileID: 1722891874241318160, guid: 6a73dbe7f34ea864eb86f5bbfccaa033,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3166814444043639594, guid: 6a73dbe7f34ea864eb86f5bbfccaa033,
         type: 3}
       propertyPath: m_Camera
@@ -1315,7 +1320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c34294a76f37164db733e6b3d7d46c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceAmount: 10
+  forceAmount: 30
 --- !u!65 &593069396
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2979,7 +2984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c34294a76f37164db733e6b3d7d46c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceAmount: 10
+  forceAmount: 50
 --- !u!65 &1075535295
 BoxCollider:
   m_ObjectHideFlags: 0

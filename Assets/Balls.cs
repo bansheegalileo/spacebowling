@@ -1,4 +1,5 @@
 using UnityEngine;
+using WebXR;
 
 public class BallPickupAndDrag : MonoBehaviour
 {
@@ -14,10 +15,9 @@ public class BallPickupAndDrag : MonoBehaviour
     private Vector3 m_previousPos;
     private bool isPickedUp = false;
     private bool isThrown = false;
-
     private bool isInLaneTrigger = false;
 
-    private CameraMove laneCameraFocus; // ✅ Renamed to match your script
+    private CameraMove laneCameraFocus;
 
     void Awake()
     {
@@ -31,16 +31,25 @@ public class BallPickupAndDrag : MonoBehaviour
 
     void Update()
     {
-        if (isThrown && !isPickedUp && isInLaneTrigger)
+        // WebXR VR joystick support
+        if (!isPickedUp && isInLaneTrigger && WebXRManager.Instance != null && WebXRManager.Instance.isVRPresenting)
+        {
+            // De-Panther WebXR supports Input.GetAxis
+            float xAxis = Input.GetAxis("XRI_Left_Primary2DAxis_Horizontal");
+
+            if (Mathf.Abs(xAxis) > 0.1f)
+            {
+                rb.AddForce(Vector3.right * xAxis * xMovementForce, ForceMode.Force);
+            }
+        }
+
+        // Keyboard support (fallback for desktop)
+        if (!isPickedUp && isInLaneTrigger && (!WebXRManager.Instance || !WebXRManager.Instance.isVRPresenting))
         {
             if (Input.GetKey(KeyCode.A))
-            {
-                rb.AddForce(Vector3.left * xMovementForce);
-            }
+                rb.AddForce(Vector3.left * xMovementForce, ForceMode.Force);
             if (Input.GetKey(KeyCode.D))
-            {
-                rb.AddForce(Vector3.right * xMovementForce);
-            }
+                rb.AddForce(Vector3.right * xMovementForce, ForceMode.Force);
         }
     }
 
@@ -89,17 +98,12 @@ public class BallPickupAndDrag : MonoBehaviour
 #else
         Camera[] cameras = FindObjectsOfType<Camera>();
 #endif
-        Camera result = null;
-        int camerasSum = 0;
         foreach (var camera in cameras)
         {
             if (camera.enabled)
-            {
-                result = camera;
-                camerasSum++;
-            }
+                return camera;
         }
-        return camerasSum == 1 ? result : null;
+        return null;
     }
 
     void OnTriggerEnter(Collider other)
@@ -107,8 +111,7 @@ public class BallPickupAndDrag : MonoBehaviour
         if (other.CompareTag("Lane"))
         {
             isInLaneTrigger = true;
-            if (laneCameraFocus != null)
-                laneCameraFocus.FocusOnLane();
+            laneCameraFocus?.FocusOnLane();
         }
     }
 
@@ -117,8 +120,7 @@ public class BallPickupAndDrag : MonoBehaviour
         if (other.CompareTag("Lane"))
         {
             isInLaneTrigger = false;
-            if (laneCameraFocus != null)
-                laneCameraFocus.UnfocusFromLane();
+            laneCameraFocus?.UnfocusFromLane();
         }
     }
 }
