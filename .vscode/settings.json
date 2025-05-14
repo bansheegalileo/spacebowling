@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "0x0E-unity-webxr.sln"
+    "dotnet.defaultSolution": "spacebowling.sln"
 }

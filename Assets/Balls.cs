@@ -15,16 +15,22 @@ public class BallPickupAndDrag : MonoBehaviour
     private bool isPickedUp = false;
     private bool isThrown = false;
 
-    private bool isInLaneTrigger = false; // ✅ NEW: Only allow movement inside trigger
+    private bool isInLaneTrigger = false;
+
+    private CameraMove laneCameraFocus; // ✅ Renamed to match your script
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
+    void Start()
+    {
+        laneCameraFocus = FindObjectOfType<CameraMove>();
+    }
+
     void Update()
     {
-        // ✅ Only allow force when thrown, not picked up, and in lane trigger
         if (isThrown && !isPickedUp && isInLaneTrigger)
         {
             if (Input.GetKey(KeyCode.A))
@@ -43,8 +49,8 @@ public class BallPickupAndDrag : MonoBehaviour
         m_currentCamera = FindCamera();
         if (m_currentCamera != null)
         {
-            m_screenPoint = m_currentCamera.WorldToScreenPoint(gameObject.transform.position);
-            m_offset = gameObject.transform.position - m_currentCamera.ScreenToWorldPoint(GetMousePosWithScreenZ(m_screenPoint.z));
+            m_screenPoint = m_currentCamera.WorldToScreenPoint(transform.position);
+            m_offset = transform.position - m_currentCamera.ScreenToWorldPoint(GetMousePosWithScreenZ(m_screenPoint.z));
             rb.useGravity = false;
             isPickedUp = true;
         }
@@ -93,19 +99,16 @@ public class BallPickupAndDrag : MonoBehaviour
                 camerasSum++;
             }
         }
-        if (camerasSum > 1)
-        {
-            result = null;
-        }
-        return result;
+        return camerasSum == 1 ? result : null;
     }
 
-    // ✅ TRIGGER DETECTION METHODS
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Lane")) // Make sure your trigger is tagged "Lane"
+        if (other.CompareTag("Lane"))
         {
             isInLaneTrigger = true;
+            if (laneCameraFocus != null)
+                laneCameraFocus.FocusOnLane();
         }
     }
 
@@ -114,6 +117,8 @@ public class BallPickupAndDrag : MonoBehaviour
         if (other.CompareTag("Lane"))
         {
             isInLaneTrigger = false;
+            if (laneCameraFocus != null)
+                laneCameraFocus.UnfocusFromLane();
         }
     }
 }
